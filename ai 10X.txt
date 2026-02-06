@@ -1,0 +1,23 @@
+Create a single-page app in a single HTML file with the following requirements:
+- Name: 10X
+- Goal: Guess a number between 1 and a power of 10. The exponent gets larger after every successful guess.
+- The game screen is 800x500 pixels
+- The number 10 appears at the top-center of the screen. It approximately 64 pixels tall.
+- A game starts with an exponent of 1.
+- For each round of the game, the player has to guess a random number. The random number will be between 1 and 10 with the exponent applied.
+- For each round of the game, the player will have a certain number of guesses to guess the random number.
+- The number of guess will be the exponent that is needed to make to 2 to the exponent larger than the large number to guess.
+- An example: let's say it is the second game. That means that the game is 10^2, or 100. Looking at powers of 2, 2^7 is the first exponent of 2 that is larger than 10^2. The player will have 7 guesses for that round.
+- On the left-middle of the screen is the low number. For every round of the game, it starts with the number 1 there.
+- On the right-middle of the screen is the high number. For every round of the game, it starts with the number 10 with the exponent applied.
+- At the bottom-center of the screen, it will show the following: "You have {NumberOfGuesses} guesses remaining".
+- In the center of the screen is a place where the user can enter their guess.
+- If the number is less than the small number, or more than the large number, put Invalid Guess below the center of the screen.
+- After a guess is made, the number that was guessed is removed. For the next guess, the center input starts out empty.
+- If that guess is correct, they win! It will show You Found It! in the center of the screen. After the Next button is click the screen resets, the exponent for 10 increases by 1, and a new random number is generated.
+- If that guess is larger than the random number, the number on the left is replaced with a number that is one more than the guess. The number of guessing remaining drops by 1.
+- If that guess is smaller than the random number, the number on the right is replaced with a number that is one less than the guess. The number of guessing remaining drops by 1.
+- If the number of guesses drops to 0, it will show "Game Over - the number was {RandomNumber}" in the bottom-center of the screen. A New Game button will appear in the lower-right corner of the game screen.
+- Click New Game resets the game. The exponent goes to 1. The player gets a new number to guess.
+- To help debug the game to start, show the random number in the lower-left corner.
+

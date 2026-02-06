@@ -1,0 +1,28 @@
+version 00.01	23 minutes dev	2 minutes code gen	3 minutes test		28 minutes total
+
+The goal is a guess a number between 1 and 10^x. That exponent increases each time you guess 
+a number. You start with a number between 1 and 10, then 1 and 100, 1 and 1000, and so on.
+This was the first game I developed way-back-when. Estimate: 1981. This will, eventually, 
+have many visual and audio implements. No specific reason - just making a basic game appear
+exciting.
+For each guess, the low number appears on the left, and the high number appears on the right.
+The player guesses. If they get it correct, they let the player know, and the next level starts.
+If the number is too low, it moves to the left end, and turns into the guess + 1.
+If the number is too high, it moves to the right end, and turns into the guess - 1.
+For each level, the players gets the minimum number of guesses that will always allow the
+number to be guessed, if they play correctly.
+The initial version of the game was implemented by Chat. It worked well. There was one
+easy to resolve the mistakes. Initially, after a guess, the number was sent to the wrong
+end. Easy to determine and fix. Playable as-is! Lots of UI enhancments next.
+
+
+TODO When the player wins, show the guess in the center in gold, to let them know they won.
+TOOO When the player guesses wrong, have a number in the center move to the left/right to
+	update the limits.
+TODO Place an exponent for the current level being played. In place, for the title 10 up top.
+TODO When the player wins, have the old exponent exit right, and the new exponent enters 
+	from right.
+TODO Use comma separation when value get big
+
+
+
