@@ -7,22 +7,45 @@ have many visual and audio implements. No specific reason - just making a basic 
 exciting.
 For each guess, the low number appears on the left, and the high number appears on the right.
 The player guesses. If they get it correct, they let the player know, and the next level starts.
-If the number is too low, it moves to the left end, and turns into the guess + 1.
-If the number is too high, it moves to the right end, and turns into the guess - 1.
+If the number is too low, it is assigned to the left end, and turns into the guess + 1.
+If the number is too high, it is assigned to the right end, and turns into the guess - 1.
 For each level, the players gets the minimum number of guesses that will always allow the
 number to be guessed, if they play correctly.
 The initial version of the game was implemented by Chat. It worked well. There was one
 easy to resolve the mistakes. Initially, after a guess, the number was sent to the wrong
-end. Easy to determine and fix. Playable as-is! Lots of UI enhancments next.
+end. Easy to determine and fix. Playable as-is! Lots of UI enhancements next.
 
 
-TODO When the player wins, show the guess in the center in gold, to let them know they won.
-TOOO When the player guesses wrong, have a number in the center move to the left/right to
+Version 00.02	26 minutes dev	2 minutes code gen	3 minutes test		59 minutes total
+
+The previous version was playable. For this version, adding in some UI elements. 
+Added moving exponents to the big 10 at the top of the screen. Game starts with a plain 10
+up top. After each level ends, the old exponent (if there is one there) exits to the right.
+The new exponent, the next number, enters from the right. There was an initial defect: the 
+old exponent would disappear mid-exit. This was pointed out to Chat - it was quickly fixed.
+For the time being, moved the guess control to below the main game screen. This was needed
+for another change in this version. This was easy: worked the first time.
+The center of the game screen is now used for the guess. If the guess is correct, it turns
+gold and sits there for 1 second. If it is wrong, the guess moves from the center, left or
+right depending on the guess. It collides with the number, and adjusts based on the updated
+limits. This had a small bug: the previous and new values were both shown. Let Chat know -
+it resolved the issue easy. There is a remaining tweak: when the number moves, it doesn't
+always start in the center. Where it ended the last move, that will be where it starts.
+That one I'll add to my TODO list.
+
+	
+
+IN PROGRESS When the player wins, show the guess in the center in gold, to let them know they won.
+IN PROGRESS  When the player guesses wrong, have a number in the center move to the left/right to
 	update the limits.
-TODO Place an exponent for the current level being played. In place, for the title 10 up top.
-TODO When the player wins, have the old exponent exit right, and the new exponent enters 
-	from right.
-TODO Use comma separation when value get big
+	Both of these have the same root issue: on moves, the number always starts when it last
+	was. It should always start in center.
+TODO Use comma separation when values get big
+TODO Would be best to type on the text entry below, but show it in the middle immediately.
+TODO: Add a delay on level victory: number goes gold for a second, THEN the exponents do their moving.
+TODO: The text entry and button are different sizes. I'd like then to be the same.
+
+
 
 
 
