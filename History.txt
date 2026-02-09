@@ -33,17 +33,39 @@ it resolved the issue easy. There is a remaining tweak: when the number moves, i
 always start in the center. Where it ended the last move, that will be where it starts.
 That one I'll add to my TODO list.
 
-	
 
-IN PROGRESS When the player wins, show the guess in the center in gold, to let them know they won.
-IN PROGRESS  When the player guesses wrong, have a number in the center move to the left/right to
-	update the limits.
-	Both of these have the same root issue: on moves, the number always starts when it last
-	was. It should always start in center.
-TODO Use comma separation when values get big
-TODO Would be best to type on the text entry below, but show it in the middle immediately.
+Version 00.03	14 minutes dev	3 minute code gen	4 minutes test		1 hour 20
+
+This version is to add some UI details to make the game cleaner to play. As the guess is
+typed in the text box, the number will be shown in the center of the game screen as the
+number is typed. This allows a more consistent focus on the game screen, and better UI to
+focus on. Also, I added comma-based digital separation (e.g 1,468,315) for numbers. This
+makes the game much easier to read, especially as those numbers get bigger. Finally, 
+there was a defect I mentioned from the last version: "when the number moves, it doesn't
+always start in the center. Where it ended the last move, that will be where it starts."
+These were implemented fairly quickly. The previous defect about where the numbers to
+continue to move around was still there. I pointed out the defect to Chat: I showed the
+line in the description being ignored and I point out what was happening. I tried to fix 
+it - it worked, but had a side effect on the colors. After completing the level, the
+numbers in the center turn gold. However, it was still showing as a gold for the first
+guess. Chat provided the expected one-liner to address it.
+This took a few iterations to implement, but on the upside, it fixed several known 
+defects.
+App is playable as-is after a very modest amount of time. Will look for a few enhancements.
+Release #1 might be quite quick.
+
+
+
 TODO: Add a delay on level victory: number goes gold for a second, THEN the exponents do their moving.
 TODO: The text entry and button are different sizes. I'd like then to be the same.
+TODO: A nice optimization - to start a guess, if left and right have the same number of digits,
+	include all those in a row (starting from the left) that match. Those will HAVE to 
+	be in all guesses.
+TODO: Small grammatical error. For last guess it says "You have 1 guesses remaining" Make
+	singular, or maybe change like "Last remaining guess!"
+Note: This game will be able to play up to 15 digits. This is probably fine: 10 or 12 I
+	think are the limits. It's here for reference.
+
 
 
 

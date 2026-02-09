@@ -145,6 +145,10 @@ let low, high;
 let attempts;
 let locked = false;
 
+function fmt(n) {
+  return Number(n).toLocaleString("en-US");
+}
+
 function attemptsNeeded(max) {
   let k = 1;
   while (2 ** k <= max) k++;
@@ -159,13 +163,14 @@ function startRound() {
   attempts = attemptsNeeded(max);
   locked = false;
 
-  document.getElementById("low").textContent = low;
-  document.getElementById("high").textContent = high;
+  document.getElementById("low").textContent = fmt(low);
+  document.getElementById("high").textContent = fmt(high);
   document.getElementById("status").textContent =
     `You have ${attempts} guesses remaining`;
   //document.getElementById("debug").textContent =
   //  `DEBUG: number = ${target}`;
   document.getElementById("guessSprite").textContent = "";
+  document.getElementById("guessSprite").style.color = "#fff";
   document.getElementById("newGame").style.display = "none";
 
   updateExponent(false);
@@ -216,9 +221,10 @@ function handleGuess() {
 
   locked = true;
   attempts--;
+  document.getElementById("guessInput").value = "";
 
   const sprite = document.getElementById("guessSprite");
-  sprite.textContent = g;
+  sprite.textContent = fmt(g);
   sprite.style.color = "#fff";
   sprite.style.transform = "translate(-50%, -50%)";
 
@@ -238,18 +244,35 @@ function handleGuess() {
 
     if (g > target) {
       sprite.style.transform = "translate(360px, -50%)";
+
       setTimeout(() => {
         high = g - 1;
-        document.getElementById("high").textContent = high;
+        document.getElementById("high").textContent = fmt(high);
+
+        // remove sprite and reset instantly to center
         sprite.textContent = "";
+        sprite.style.transition = "none";
+        sprite.style.transform = "translate(-50%, -50%)";
+        sprite.offsetHeight; // force reflow
+        sprite.style.transition = "transform 0.6s linear, color 0.3s";
+
         afterGuess();
       }, 600);
-    } else {
+    }      
+    else {
       sprite.style.transform = "translate(-360px, -50%)";
+
       setTimeout(() => {
         low = g + 1;
-        document.getElementById("low").textContent = low;
+        document.getElementById("low").textContent = fmt(low);
+
+        // remove sprite and reset instantly to center
         sprite.textContent = "";
+        sprite.style.transition = "none";
+        sprite.style.transform = "translate(-50%, -50%)";
+        sprite.offsetHeight; // force reflow
+        sprite.style.transition = "transform 0.6s linear, color 0.3s";
+
         afterGuess();
       }, 600);
     }
@@ -259,7 +282,7 @@ function handleGuess() {
 function afterGuess() {
   if (attempts === 0) {
     document.getElementById("status").textContent =
-      `Game Over - the number was ${target}`;
+      `Game Over - the number was ${fmt(target)}`;
     document.getElementById("newGame").style.display = "block";
     return;
   }
@@ -277,6 +300,19 @@ document.getElementById("newGame").onclick = () => {
 
 document.getElementById("guessInput").addEventListener("keydown", e => {
   if (e.key === "Enter") handleGuess();
+});
+
+document.getElementById("guessInput").addEventListener("input", e => {
+  const val = e.target.value;
+  if (!val) {
+    document.getElementById("guessSprite").textContent = "";
+    return;
+  }
+
+  const n = Number(val);
+  if (!Number.isNaN(n)) {
+    document.getElementById("guessSprite").textContent = fmt(n);
+  }
 });
 
 startRound();
