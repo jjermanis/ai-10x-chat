@@ -55,14 +55,27 @@ App is playable as-is after a very modest amount of time. Will look for a few en
 Release #1 might be quite quick.
 
 
+Version 00.04 	10 minutes dev	1 minute code gen	3 minutes test		1 hour 34
 
-TODO: Add a delay on level victory: number goes gold for a second, THEN the exponents do their moving.
-TODO: The text entry and button are different sizes. I'd like then to be the same.
+There are a couple minor enhancements made here.
+First, when the correct answer is guessed, the old exponent immediately exited, replaced
+by the new one. To help the UI a bit, when they are announced as correct, the game will
+wait for 2 seconds. The first attempt by Chat worked well, but with an edge case. If
+you type numbers during those 2 seconds, the golden UI is updated. You can change it to 
+the wrong number and it will update the (still) gold number. To fix, the text entry will  
+be disabled during the gold color exponent travel sequence. That worked well.
+Next, the guess text entry and Guess button have slightly different vertical sizes and 
+locations. I wanted both to match the height and Y-axis location of the text entry. Chat
+generated this code quickly, and the first iteration worked.
+
+
 TODO: A nice optimization - to start a guess, if left and right have the same number of digits,
 	include all those in a row (starting from the left) that match. Those will HAVE to 
-	be in all guesses.
+	be in all possible guesses.
 TODO: Small grammatical error. For last guess it says "You have 1 guesses remaining" Make
 	singular, or maybe change like "Last remaining guess!"
+TODO: If you guess an invalid number, the "Invalid Guess" moves the text and button.
+	Not sure what's best. Could move the message under the text, or under center.
 Note: This game will be able to play up to 15 digits. This is probably fine: 10 or 12 I
 	think are the limits. It's here for reference.
 

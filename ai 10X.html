@@ -90,13 +90,18 @@
 
   #controls {
     margin-top: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   #guessInput {
     font-size: 24px;
     width: 200px;
+    height: 40px;
     text-align: center;
+    box-sizing: border-box;
   }
 
   #invalid {
@@ -107,8 +112,8 @@
 
   button {
     font-size: 18px;
-    padding: 6px 16px;
-    margin-left: 10px;
+    height: 40px;
+    padding: 0 16px;
     cursor: pointer;
   }
 </style>
@@ -171,6 +176,8 @@ function startRound() {
   //  `DEBUG: number = ${target}`;
   document.getElementById("guessSprite").textContent = "";
   document.getElementById("guessSprite").style.color = "#fff";
+  document.getElementById("guessInput").disabled = false;
+  document.getElementById("guessInput").focus();
   document.getElementById("newGame").style.display = "none";
 
   updateExponent(false);
@@ -229,9 +236,13 @@ function handleGuess() {
   sprite.style.transform = "translate(-50%, -50%)";
 
   setTimeout(() => {
-    if (g === target) {
-      sprite.style.color = "gold";
-      document.getElementById("status").textContent = "You Found It!";
+  if (g === target) {
+    sprite.style.color = "gold";
+    document.getElementById("status").textContent = "You Found It!";
+    document.getElementById("guessInput").disabled = true;
+
+    // wait 2 seconds before exponent animation starts
+    setTimeout(() => {
       updateExponent(true);
 
       setTimeout(() => {
@@ -239,8 +250,11 @@ function handleGuess() {
         bringInExponent();
         setTimeout(startRound, 1000);
       }, 1000);
-      return;
-    }
+
+    }, 2000);
+
+    return;
+  }
 
     if (g > target) {
       sprite.style.transform = "translate(360px, -50%)";
