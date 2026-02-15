@@ -91,19 +91,41 @@ changes are made for this, I want it in one spot. I can do this, but I gave it t
 It was quick and easy - worked first time.
 
 
-TODO: A nice optimization - to start a guess, if left and right have the same number of digits,
-	include all those in a row (starting from the left) that match. Those will HAVE to 
-	be in all possible guesses.
-TODO: When the game is over, the user can type in guesses. You can't actually make a guess,
-	but the UI allows it. Maybe disable those to make it clear.
+Version 00.06	8 minutes dev	0 minute code gen	4 minutes test		1 hour 59
+
+A small defect was noticed: when the game is over, the user can type in guesses. You 
+can't actually make a guess, but the UI allows it. Chat created a method to enable or
+disable the guess entry and button. I update all the references to set that state to use
+the method. This worked on the first try.
+I thought of a nice optimization for entering guesses. If the left and right have similar 
+numbers (same number of digits) all matching digits from left to right are auto-entered.
+As an example, if the left is 12,345 and the right is 12,398, the starting guess will be
+123 - all guessing have to start with that. I asked Chat for that - it worked great on
+the first attempt. This has a small issue: the shared matching digits are shown, even if
+there are no remaining guesses and the game is over. A one-line fix to prevent this with 
+no remain moves fixed this. I think I will document this. I find it helpful - a 
+new player may be confused.
+
+
+TODO: Small case. There's that move to show the mandatory digits if the left and right
+	have some digits to match. It is being done, even on the game over. End of game
+	should leave that empty.
 Note: This game will be able to play up to 15 digits. This is probably fine: 10 or 12 to
 	end the game, so it'll work. It's here for reference.
 Note: The calculation for guaranteed moves to allow win is accurate, but can run rough.
 	A moderate sub-optimal guess or two can make it possible to lose. Maybe tweak
 	to add one move move? Still challenging, but a hair forgiving.
-
-
-
+Note: When there are numbers that the left side that match, they are part of the default
+	guess. As an example, if the left is 12,345 and the right is 12,398, the starting
+	guess will be 123. This is helpful; might be confusing. Keep an eye out for this.
+From Chat: A win counter / highest exponent reached
+From Chat: Animations when you level up
+From Chat: Add animations or sound
+From Chat: A “perfect round” indicator
+Stack guesses visually (like history)
+add digit-grouping animation (arcade-style)
+add a fade overlay
+freeze the guess sprite
 
 
 

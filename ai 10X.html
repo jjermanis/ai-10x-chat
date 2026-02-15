@@ -175,6 +175,36 @@ function updateRemainingGuesses() {
   }
 }
 
+function setInputEnabled(enabled) {
+  document.getElementById("guessInput").disabled = !enabled;
+  document.getElementById("guessBtn").disabled = !enabled;
+}
+
+function applyPrefixHint() {
+
+  if (attempts === 0) return;
+
+  const lowStr = String(low);
+  const highStr = String(high);
+
+  if (lowStr.length !== highStr.length) return;
+
+  let prefix = "";
+
+  for (let i = 0; i < lowStr.length; i++) {
+    if (lowStr[i] === highStr[i]) {
+      prefix += lowStr[i];
+    } else {
+      break;
+    }
+  }
+
+  if (prefix.length > 0) {
+    document.getElementById("guessInput").value = prefix;
+    document.getElementById("guessSprite").textContent = prefix;
+  }
+}
+
 function startRound() {
   max = 10 ** level;
   target = Math.floor(Math.random() * max) + 1;
@@ -192,7 +222,7 @@ function startRound() {
   }
   document.getElementById("guessSprite").textContent = "";
   document.getElementById("guessSprite").style.color = "#fff";
-  document.getElementById("guessInput").disabled = false;
+  setInputEnabled(true);
   document.getElementById("guessInput").focus();
   document.getElementById("newGame").style.display = "none";
 
@@ -255,7 +285,7 @@ function handleGuess() {
   if (g === target) {
     sprite.style.color = "gold";
     document.getElementById("status").textContent = "You Found It!";
-    document.getElementById("guessInput").disabled = true;
+    setInputEnabled(false);
 
     // wait 2 seconds before exponent animation starts
     setTimeout(() => {
@@ -278,6 +308,7 @@ function handleGuess() {
       setTimeout(() => {
         high = g - 1;
         document.getElementById("high").textContent = fmt(high);
+        applyPrefixHint();
 
         // remove sprite and reset instantly to center
         sprite.textContent = "";
@@ -295,6 +326,7 @@ function handleGuess() {
       setTimeout(() => {
         low = g + 1;
         document.getElementById("low").textContent = fmt(low);
+        applyPrefixHint();
 
         // remove sprite and reset instantly to center
         sprite.textContent = "";
@@ -314,6 +346,8 @@ function afterGuess() {
     document.getElementById("status").textContent =
       `Game Over - the number was ${fmt(target)}`;
     document.getElementById("newGame").style.display = "block";
+    setInputEnabled(false);
+
     return;
   }
 
