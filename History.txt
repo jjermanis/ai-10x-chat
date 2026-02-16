@@ -107,14 +107,23 @@ no remain moves fixed this. I think I will document this. I find it helpful - a
 new player may be confused.
 
 
-TODO: Small case. There's that move to show the mandatory digits if the left and right
-	have some digits to match. It is being done, even on the game over. End of game
-	should leave that empty.
-Note: This game will be able to play up to 15 digits. This is probably fine: 10 or 12 to
-	end the game, so it'll work. It's here for reference.
+Version 00.07	9 minutes dev	1 minute code gen	2 minutes test		2 hours 11
+
+One UI defect remained from the recent shortcut for automatically putting prefixes when 
+the left and right numbers match. It would place this prefix in the entry control, not the 
+view of the guess in the center. I asked Chat to address. That first attempt had no effect. 
+I tried it again. This also had no effect. I pointed out the reasons why these didn't work 
+and asked it to try again. Like they say: the third time's a charm. The center guess number 
+now stays synched with the guess entry control.
+I think this is likely to be the first release version.
+
+
+
+Note: This game will be able to play up to 15 digits. This is probably fine: having 10 or 
+	12 to end the game works. It's here for reference.
 Note: The calculation for guaranteed moves to allow win is accurate, but can run rough.
 	A moderate sub-optimal guess or two can make it possible to lose. Maybe tweak
-	to add one move move? Still challenging, but a hair forgiving.
+	to add one more move? Still challenging, but a hair forgiving.
 Note: When there are numbers that the left side that match, they are part of the default
 	guess. As an example, if the left is 12,345 and the right is 12,398, the starting
 	guess will be 123. This is helpful; might be confusing. Keep an eye out for this.
@@ -122,10 +131,10 @@ From Chat: A win counter / highest exponent reached
 From Chat: Animations when you level up
 From Chat: Add animations or sound
 From Chat: A “perfect round” indicator
-Stack guesses visually (like history)
-add digit-grouping animation (arcade-style)
-add a fade overlay
-freeze the guess sprite
+From Chat: Stack guesses visually (like history)
+From Chat: add digit-grouping animation (arcade-style)
+From Chat: add a fade overlay
+From Chat: freeze the guess sprite
 
 
 
